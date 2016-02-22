@@ -3,7 +3,6 @@
 var expect = require('expect.js');
 var commandExists = require('..');
 
-
 describe('commandExists()', function(){
 
     it('it should find a command named ls', function(done){
