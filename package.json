@@ -16,6 +16,9 @@
     "exists"
   ],
   "author": "Matthew Conlen",
+  "contributors": [
+    "Arthur Silber <arthur@arthursilber.de> (https://arthursilber.de)"
+  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/mathisonian/command-exists/issues"
