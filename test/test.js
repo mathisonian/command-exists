@@ -6,7 +6,7 @@ var commandExistsSync = commandExists.sync;
 var isUsingWindows = process.platform == 'win32'
 
 describe('commandExists', function(){
-    describe('async', function() {
+    describe('async - callback', function() {
         it('it should find a command named ls or dir', function(done){
             var commandToUse = 'ls'
             if (isUsingWindows) {
@@ -29,8 +29,34 @@ describe('commandExists', function(){
         });
     });
 
-    describe('sync', function() {
+    describe('async - promise', function() {
         it('it should find a command named ls or dir', function(done){
+            var commandToUse = 'ls'
+            if (isUsingWindows) {
+                commandToUse = 'dir'
+            }
+
+            commandExists(commandToUse)
+            .then(function(command) {
+                expect(command).to.be(commandToUse);
+                done();
+            });
+        });
+
+        it('it should not find a command named fdsafdsafdsafdsafdsa', function(done){
+            commandExists('fdsafdsafdsafdsafdsa')
+            .then(function() {
+                // We should not execute this line.
+                expect(true).to.be(false);
+            })
+            .catch(function() {
+                done();
+            });
+        });
+    });
+
+    describe('sync', function() {
+        it('it should find a command named ls or dir', function(){
             var commandToUse = 'ls'
             if (isUsingWindows) {
                 commandToUse = 'dir'
@@ -38,7 +64,7 @@ describe('commandExists', function(){
             expect(commandExistsSync(commandToUse)).to.be(true);
         });
 
-        it('it should not find a command named fdsafdsafdsafdsafdsa', function(done){
+        it('it should not find a command named fdsafdsafdsafdsafdsa', function(){
             expect(commandExistsSync('fdsafdsafdsafdsafdsa')).to.be(false);
         });
     });

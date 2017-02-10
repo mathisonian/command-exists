@@ -23,8 +23,20 @@ commandExists('ls', function(err, commandExists) {
     }
 
 });
-
 ```
+### promise
+```js
+var commandExists = require('command-exists');
+
+// invoked without a callback, it returns a promise
+commandExists('ls')
+.then(function(command){
+    // proceed
+}).catch(function(){
+    // command doesn't exist
+});
+```
+
 ### sync
 ```js
 var commandExistsSync = require('command-exists').sync;
