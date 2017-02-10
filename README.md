@@ -48,3 +48,18 @@ if (commandExistsSync('ls')) {
 }
 
 ```
+
+
+## changelog
+
+### v1.2.0
+
+Add support for promises
+
+### v1.1.0
+
+Add synchronous version
+
+### v1.0.2
+
+Support for windows
