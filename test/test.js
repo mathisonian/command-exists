@@ -30,7 +30,7 @@ describe('commandExists', function(){
     });
 
     describe('sync', function() {
-        it('it should find a command named ls or dir', function(done){
+        it('it should find a command named ls or dir', function(){
             var commandToUse = 'ls'
             if (isUsingWindows) {
                 commandToUse = 'dir'
@@ -38,7 +38,7 @@ describe('commandExists', function(){
             expect(commandExistsSync(commandToUse)).to.be(true);
         });
 
-        it('it should not find a command named fdsafdsafdsafdsafdsa', function(done){
+        it('it should not find a command named fdsafdsafdsafdsafdsa', function(){
             expect(commandExistsSync('fdsafdsafdsafdsafdsa')).to.be(false);
         });
     });
