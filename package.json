@@ -1,6 +1,6 @@
 {
   "name": "command-exists",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "check whether a command line command exists in the current environment",
   "main": "index.js",
   "scripts": {
