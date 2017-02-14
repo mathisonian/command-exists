@@ -68,4 +68,27 @@ describe('commandExists', function(){
             expect(commandExistsSync('fdsafdsafdsafdsafdsa')).to.be(false);
         });
     });
+
+    describe('local file', function() {
+        it('it should report false if there is a non-executable file with that name', function(done) {
+            var commandToUse = 'test/non-executable-script.js'
+            commandExists(commandToUse)
+                .then(function(command){
+                    // We should not execute this line.
+                    expect(true).to.be(false);
+                }).catch(function(err){
+                    expect(err).to.be(null);
+                    done();
+                });
+        });
+        it('it should report true if there is an executable file with that name', function(done) {
+            var commandToUse = 'test/executable-script.js'
+            commandExists(commandToUse)
+                .then(function(command){
+                    // We should not execute this line.
+                    expect(command).to.be(commandToUse);
+                    done();
+                });
+        });
+    });
 });

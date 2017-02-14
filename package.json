@@ -4,7 +4,7 @@
   "description": "check whether a command line command exists in the current environment",
   "main": "index.js",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha test/test.js"
   },
   "repository": {
     "type": "git",
