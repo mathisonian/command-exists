@@ -7,7 +7,9 @@ node module to check if a command-line command exists
 
 ## installation
 
+```bash
 npm install command-exists
+```
 
 ## usage
 
