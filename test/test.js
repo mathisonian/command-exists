@@ -67,6 +67,10 @@ describe('commandExists', function(){
         it('it should not find a command named fdsafdsafdsafdsafdsa', function(){
             expect(commandExistsSync('fdsafdsafdsafdsafdsa')).to.be(false);
         });
+
+        it('it should not execute some nefarious code', function(){
+            expect(commandExistsSync('ls; touch /tmp/foo0')).to.be(false);
+        });
     });
 
     describe('local file', function() {
