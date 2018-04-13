@@ -54,7 +54,11 @@ if (commandExistsSync('ls')) {
 
 ## changelog
 
-### v1.4.0
+### v1.2.5
+
+Fix windows bug introduced in 1.2.4.
+
+### v1.2.4
 
 Fix potential security issue.
 
