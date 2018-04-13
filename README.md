@@ -54,6 +54,10 @@ if (commandExistsSync('ls')) {
 
 ## changelog
 
+### v1.4.0
+
+Fix potential security issue.
+
 ### v1.2.0
 
 Add support for promises
