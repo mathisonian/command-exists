@@ -68,7 +68,7 @@ describe('commandExists', function(){
             expect(commandExistsSync('fdsafdsafdsafdsafdsa')).to.be(false);
         });
 
-        it.only('it should not find a command named ls or dir prefixed with some nonsense', function(){
+        it('it should not find a command named ls or dir prefixed with some nonsense', function(){
             var commandToUse = 'fdsafdsa ls'
             if (isUsingWindows) {
                 commandToUse = 'fdsafdsaf dir'
