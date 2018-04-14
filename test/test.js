@@ -68,8 +68,20 @@ describe('commandExists', function(){
             expect(commandExistsSync('fdsafdsafdsafdsafdsa')).to.be(false);
         });
 
+        it.only('it should not find a command named ls or dir prefixed with some nonsense', function(){
+            var commandToUse = 'fdsafdsa ls'
+            if (isUsingWindows) {
+                commandToUse = 'fdsafdsaf dir'
+            }
+            expect(commandExistsSync(commandToUse)).to.be(false);
+        });
+
         it('it should not execute some nefarious code', function(){
             expect(commandExistsSync('ls; touch /tmp/foo0')).to.be(false);
+        });
+
+        it('it should not execute some nefarious code', function(){
+            expect(commandExistsSync('ls touch /tmp/foo0')).to.be(false);
         });
     });
 
