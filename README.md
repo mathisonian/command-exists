@@ -54,6 +54,10 @@ if (commandExistsSync('ls')) {
 
 ## changelog
 
+### v1.2.7
+
+Removes unnecessary printed output on windows.
+
 ### v1.2.6
 
 Small bugfixes.
