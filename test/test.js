@@ -110,5 +110,16 @@ describe('commandExists', function(){
                     });
             });
         }
+
+        if (isUsingWindows) {
+            it('it should report true if there is an executable file with that name', function(done) {
+                var commandToUse = 'test\\executable-script.cmd'
+                commandExists(commandToUse)
+                    .then(function(command){
+                        expect(command).to.be(commandToUse);
+                        done();
+                    });
+            });
+        }
     });
 });
