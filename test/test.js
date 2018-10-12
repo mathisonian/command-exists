@@ -120,6 +120,11 @@ describe('commandExists', function(){
                         done();
                     });
             });
+
+            it('it should report false if there is a double quotation mark in the file path', function() {
+                var commandToUse = 'test\\"executable-script.cmd'
+                expect(commandExists.sync(commandToUse)).to.be(false);
+            });
         }
     });
 });
