@@ -3,6 +3,7 @@
 var expect = require('expect.js');
 var commandExists = require('..');
 var commandExistsSync = commandExists.sync;
+var resolve = require('path').resolve;
 var isUsingWindows = process.platform == 'win32'
 
 describe('commandExists', function(){
@@ -123,6 +124,39 @@ describe('commandExists', function(){
 
             it('it should report false if there is a double quotation mark in the file path', function() {
                 var commandToUse = 'test\\"executable-script.cmd'
+                expect(commandExists.sync(commandToUse)).to.be(false);
+            });
+        }
+    });
+
+    describe('absolute path', function() {
+        if (!isUsingWindows) {
+            it('it should report true if there is a command with that name in absolute path', function(done) {
+                var commandToUse = resolve('./test/executable-script.cmd')
+                commandExists(commandToUse)
+                .then(function(command){
+                    expect(command).to.be(commandToUse);
+                    done();
+                });
+            });
+            
+            it('it should report false if there is not a command with that name in absolute path', function() {
+                var commandToUse = resolve('./executable-script.cmd')
+                expect(commandExists.sync(commandToUse)).to.be(false);
+            });
+        }
+        if (isUsingWindows) {
+            it('it should report true if there is a command with that name in absolute path', function(done) {
+                var commandToUse = resolve('.\\test\\executable-script.cmd')
+                commandExists(commandToUse)
+                .then(function(command){
+                    expect(command).to.be(commandToUse);
+                    done();
+                });
+            });
+            
+            it('it should report false if there is not a command with that name in absolute path', function() {
+                var commandToUse = resolve('.\\executable-script.cmd')
                 expect(commandExists.sync(commandToUse)).to.be(false);
             });
         }
