@@ -130,35 +130,18 @@ describe('commandExists', function(){
     });
 
     describe('absolute path', function() {
-        if (!isUsingWindows) {
-            it('it should report true if there is a command with that name in absolute path', function(done) {
-                var commandToUse = resolve('test/executable-script.js');
-                commandExists(commandToUse)
-                .then(function(command){
-                    expect(command).to.be(commandToUse);
-                    done();
-                });
+        it('it should report true if there is a command with that name in absolute path', function(done) {
+            var commandToUse = resolve('test/executable-script.js');
+            commandExists(commandToUse)
+            .then(function(command){
+                expect(command).to.be(commandToUse);
+                done();
             });
-            
-            it('it should report false if there is not a command with that name in absolute path', function() {
-                var commandToUse = resolve('executable-script.js');
-                expect(commandExists.sync(commandToUse)).to.be(false);
-            });
-        }
-        if (isUsingWindows) {
-            it('it should report true if there is a command with that name in absolute path', function(done) {
-                var commandToUse = resolve('test\\executable-script.cmd');
-                commandExists(commandToUse)
-                .then(function(command){
-                    expect(command).to.be(commandToUse);
-                    done();
-                });
-            });
-            
-            it('it should report false if there is not a command with that name in absolute path', function() {
-                var commandToUse = resolve('executable-script.cmd');
-                expect(commandExists.sync(commandToUse)).to.be(false);
-            });
-        }
+        });
+        
+        it('it should report false if there is not a command with that name in absolute path', function() {
+            var commandToUse = resolve('executable-script.js');
+            expect(commandExists.sync(commandToUse)).to.be(false);
+        });
     });
 });
