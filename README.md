@@ -54,6 +54,15 @@ if (commandExistsSync('ls')) {
 
 ## changelog
 
+
+### v1.2.9
+
+Fix issue with absolute paths on Windows ([#24](https://github.com/mathisonian/command-exists/pull/24))
+
+### v1.2.8
+
+Fix issue with paths on Windows ([#21](https://github.com/mathisonian/command-exists/pull/21))
+
 ### v1.2.7
 
 Removes unnecessary printed output on windows.
