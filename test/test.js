@@ -1,17 +1,17 @@
 'use strict';
 
-var expect = require('expect.js');
-var commandExists = require('..');
-var commandExistsSync = commandExists.sync;
-var resolve = require('path').resolve;
-var isUsingWindows = process.platform == 'win32'
+const expect = require('expect.js');
+const commandExists = require('..');
+const commandExistsSync = commandExists.sync;
+const resolve = require('path').resolve;
+const isUsingWindows = process.platform === 'win32';
 
 describe('commandExists', function(){
     describe('async - callback', function() {
         it('it should find a command named ls or xcopy', function(done){
-            var commandToUse = 'ls'
+            let commandToUse = 'ls';
             if (isUsingWindows) {
-                commandToUse = 'xcopy'
+                commandToUse = 'xcopy';
             }
 
             commandExists(commandToUse, function(err, exists) {
@@ -32,9 +32,9 @@ describe('commandExists', function(){
 
     describe('async - promise', function() {
         it('it should find a command named ls or xcopy', function(done){
-            var commandToUse = 'ls'
+            let commandToUse = 'ls';
             if (isUsingWindows) {
-                commandToUse = 'xcopy'
+                commandToUse = 'xcopy';
             }
 
             commandExists(commandToUse)
@@ -58,9 +58,9 @@ describe('commandExists', function(){
 
     describe('sync', function() {
         it('it should find a command named ls or xcopy', function(){
-            var commandToUse = 'ls'
+            let commandToUse = 'ls';
             if (isUsingWindows) {
-                commandToUse = 'xcopy'
+                commandToUse = 'xcopy';
             }
             expect(commandExistsSync(commandToUse)).to.be(true);
         });
@@ -70,9 +70,9 @@ describe('commandExists', function(){
         });
 
         it('it should not find a command named ls or xcopy prefixed with some nonsense', function(){
-            var commandToUse = 'fdsafdsa ls'
+            let commandToUse = 'fdsafdsa ls';
             if (isUsingWindows) {
-                commandToUse = 'fdsafdsaf xcopy'
+                commandToUse = 'fdsafdsaf xcopy';
             }
             expect(commandExistsSync(commandToUse)).to.be(false);
         });
@@ -88,9 +88,9 @@ describe('commandExists', function(){
 
     describe('local file', function() {
         it('it should report false if there is a non-executable file with that name', function(done) {
-            var commandToUse = 'test/non-executable-script.js'
+            const commandToUse = 'test/non-executable-script.js';
             commandExists(commandToUse)
-                .then(function(command){
+                .then(function(){
                     // We should not execute this line.
                     expect(true).to.be(false);
                 }).catch(function(err){
@@ -102,7 +102,7 @@ describe('commandExists', function(){
 
         if (!isUsingWindows) {
             it('it should report true if there is an executable file with that name', function(done) {
-                var commandToUse = 'test/executable-script.js'
+                const commandToUse = 'test/executable-script.js';
                 commandExists(commandToUse)
                     .then(function(command){
                         // We should not execute this line.
@@ -114,7 +114,7 @@ describe('commandExists', function(){
 
         if (isUsingWindows) {
             it('it should report true if there is an executable file with that name', function(done) {
-                var commandToUse = 'test\\executable-script.cmd'
+                const commandToUse = 'test\\executable-script.cmd';
                 commandExists(commandToUse)
                     .then(function(command){
                         expect(command).to.be(commandToUse);
@@ -123,7 +123,7 @@ describe('commandExists', function(){
             });
 
             it('it should report false if there is a double quotation mark in the file path', function() {
-                var commandToUse = 'test\\"executable-script.cmd'
+                const commandToUse = 'test\\"executable-script.cmd';
                 expect(commandExists.sync(commandToUse)).to.be(false);
             });
         }
@@ -131,16 +131,16 @@ describe('commandExists', function(){
 
     describe('absolute path', function() {
         it('it should report true if there is a command with that name in absolute path', function(done) {
-            var commandToUse = resolve('test/executable-script.js');
+            const commandToUse = resolve('test/executable-script.js');
             commandExists(commandToUse)
             .then(function(command){
                 expect(command).to.be(commandToUse);
                 done();
             });
         });
-        
+
         it('it should report false if there is not a command with that name in absolute path', function() {
-            var commandToUse = resolve('executable-script.js');
+            const commandToUse = resolve('executable-script.js');
             expect(commandExists.sync(commandToUse)).to.be(false);
         });
     });

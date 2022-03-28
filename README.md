@@ -65,7 +65,7 @@ Fix issue with paths on Windows ([#21](https://github.com/mathisonian/command-ex
 
 ### v1.2.7
 
-Removes unnecessary printed output on windows.
+Removes unnecessary printed output on Windows.
 
 ### v1.2.6
 
