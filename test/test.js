@@ -148,24 +148,30 @@ describe('commandExists', function () {
     describe('env', function () {
         before(function () {
             fs.copyFileSync('test/non-executable-shell-script', 'executable-shell-script');
+            process.env['PATH'] = resolve('test/');
         });
+
         describe('sync', function () {
             it('it should report true if there is a command with that name in env but the absolut path is not executable', function () {
-                process.env['PATH'] = resolve('test/');
                 expect(commandExistsSync('executable-shell-script')).to.be(true);
             });
         });
 
-        it('it should report true if there is a command with that name in env but the absolut path is not executable', function (done) {
-            process.env['PATH'] = resolve('test/');
-            commandExists('executable-shell-script')
-                .then(function (command) {
-                    expect(command).to.be(true);
-                    done();
-                });
+        describe('async', function () {
+            it('it should report the command if it is in the env but the absolut path is not executable', function (done) {
+                const commandToUse = 'executable-shell-script';
+                commandExists(commandToUse)
+                    .then(function (command) {
+                        expect(command).to.be(commandToUse);
+                        done();
+                    }).catch(function (reason) {
+                        console.log(reason);
+                    }
+                );
+            });
         });
 
-        after(function (){
+        after(function () {
             fs.unlinkSync('executable-shell-script');
         });
     });
