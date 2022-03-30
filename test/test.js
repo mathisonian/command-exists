@@ -182,7 +182,7 @@ describe('commandExists', function () {
             }else {
                 fs.copyFileSync('test/non-executable-shell-script', scriptName);
             }
-            process.env['PATH'] = resolve('test/');
+            process.env['PATH'] += ';'+resolve('test/');
         });
 
         describe('sync', function () {
