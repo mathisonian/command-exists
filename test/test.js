@@ -129,6 +129,32 @@ describe('commandExists', function () {
         }
     });
 
+    describe('folder', function () {
+        const randomDirName = 'asdauwhbfuk';
+        before(function (){
+           fs.mkdirSync(randomDirName);
+        });
+
+        describe('sync', function () {
+            it('should return false cause its just a folder', function () {
+                expect(commandExistsSync(randomDirName)).to.be(false);
+            });
+        });
+
+        describe('async', function () {
+            it('should return false cause its just a folder', function (done) {
+                commandExists(randomDirName, function (command) {
+                    expect(command).to.be(null);
+                    done();
+                });
+            });
+        });
+
+        after(function (){
+           fs.rmdirSync(randomDirName);
+        });
+    });
+
     describe('absolute path', function () {
         it('it should report true if there is a command with that name in absolute path', function (done) {
             const commandToUse = resolve('test/executable-script.js');
@@ -145,7 +171,7 @@ describe('commandExists', function () {
         });
     });
 
-    describe('env', function () {
+    describe('local file "conflicting" with env', function () {
         before(function () {
             fs.copyFileSync('test/non-executable-shell-script', 'executable-shell-script');
             process.env['PATH'] = resolve('test/');
