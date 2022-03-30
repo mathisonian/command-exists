@@ -6,9 +6,12 @@
   "scripts": {
     "test": "mocha test/test.js"
   },
+  "engines": {
+    "node": ">=12.0.0"
+  },
   "repository": {
     "type": "git",
-    "url": "http://github.com/mathisonian/command-exists"
+    "url": "https://github.com/mathisonian/command-exists"
   },
   "keywords": [
     "cli",
@@ -27,6 +30,6 @@
   "devDependencies": {
     "expect.js": "^0.3.1",
     "jshint": "^2.9.1",
-    "mocha": "^2.5.3"
+    "mocha": "^9.2.2"
   }
 }

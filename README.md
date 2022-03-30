@@ -3,7 +3,7 @@ command-exists
 
 node module to check if a command-line command exists
 
-
+**supported Node Versions**: 12+
 
 ## installation
 
@@ -16,32 +16,35 @@ npm install command-exists
 ### async
 
 ```js
-var commandExists = require('command-exists');
+const commandExists = require('command-exists');
 
-commandExists('ls', function(err, commandExists) {
+commandExists('ls', function (err, commandExists) {
 
-    if(commandExists) {
+    if (commandExists) {
         // proceed confidently knowing this command is available
     }
 
 });
 ```
+
 ### promise
+
 ```js
-var commandExists = require('command-exists');
+const commandExists = require('command-exists');
 
 // invoked without a callback, it returns a promise
 commandExists('ls')
-.then(function(command){
-    // proceed
-}).catch(function(){
+    .then(function (command) {
+        // proceed
+    }).catch(function () {
     // command doesn't exist
 });
 ```
 
 ### sync
+
 ```js
-var commandExistsSync = require('command-exists').sync;
+const commandExistsSync = require('command-exists').sync;
 // returns true/false; doesn't throw
 if (commandExistsSync('ls')) {
     // proceed
@@ -51,9 +54,7 @@ if (commandExistsSync('ls')) {
 
 ```
 
-
 ## changelog
-
 
 ### v1.2.9
 
@@ -65,7 +66,7 @@ Fix issue with paths on Windows ([#21](https://github.com/mathisonian/command-ex
 
 ### v1.2.7
 
-Removes unnecessary printed output on windows.
+Removes unnecessary printed output on Windows.
 
 ### v1.2.6
 
