@@ -172,23 +172,30 @@ describe('commandExists', function () {
     });
 
     describe('local file "conflicting" with env', function () {
+        let scriptName = 'executable-shell-script';
+        if(isUsingWindows) {
+            scriptName = 'executable-script.cmd';
+        }
         before(function () {
-            fs.copyFileSync('test/non-executable-shell-script', 'executable-shell-script');
+            if(isUsingWindows){
+                fs.mkdirSync(scriptName);
+            }else {
+                fs.copyFileSync('test/non-executable-shell-script', scriptName);
+            }
             process.env['PATH'] = resolve('test/');
         });
 
         describe('sync', function () {
             it('it should report true if there is a command with that name in env but the absolut path is not executable', function () {
-                expect(commandExistsSync('executable-shell-script')).to.be(true);
+                expect(commandExistsSync(scriptName)).to.be(true);
             });
         });
 
         describe('async', function () {
             it('it should report the command if it is in the env but the absolut path is not executable', function (done) {
-                const commandToUse = 'executable-shell-script';
-                commandExists(commandToUse)
+                commandExists(scriptName)
                     .then(function (command) {
-                        expect(command).to.be(commandToUse);
+                        expect(command).to.be(scriptName);
                         done();
                     }).catch(function (reason) {
                         console.log(reason);
@@ -198,7 +205,11 @@ describe('commandExists', function () {
         });
 
         after(function () {
-            fs.unlinkSync('executable-shell-script');
+            if(isUsingWindows){
+                fs.rmdirSync(scriptName);
+            }else {
+                fs.unlinkSync(scriptName);
+            }
         });
     });
 });
