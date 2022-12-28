@@ -46,11 +46,13 @@ describe('commandExists', function(){
 
         it('it should not find a command named fdsafdsafdsafdsafdsa', function(done){
             commandExists('fdsafdsafdsafdsafdsa')
-            .then(function() {
-                // We should not execute this line.
-                expect(true).to.be(false);
+            .then(function(command) {
+                expect(command).to.be(false);
+                done();
             })
-            .catch(function() {
+            .catch(function(error) {
+                // We should not execute this line.
+                expect(error).to.be(null);
                 done();
             });
         });
@@ -91,9 +93,10 @@ describe('commandExists', function(){
             var commandToUse = 'test/non-executable-script.js'
             commandExists(commandToUse)
                 .then(function(command){
-                    // We should not execute this line.
-                    expect(true).to.be(false);
+                    expect(command).to.be(false);
+                    done();
                 }).catch(function(err){
+                    // We should not execute this line.
                     expect(err).to.be(null);
                     done();
                 });
